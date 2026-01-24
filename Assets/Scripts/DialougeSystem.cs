@@ -1,25 +1,50 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class DialougeSystem : MonoBehaviour
 {
 
-    
+    public static DialougeSystem Instance;
     public int CurrentLineIndex = 0;
 
-    
+    public Image playerImage;
+    public Sprite[] EmotionSprites;
     public TextMeshProUGUI PlayerDialougeText;
     public DialogueEmotion CurrentEmotion = DialogueEmotion.Neutral;
-    public List<DialogueLine> DialogueLines = new List<DialogueLine>();
-    
-  
+
+    public List<DialogueLine> LoadedDialogueLines = new List<DialogueLine>();
+
+    public void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        InputSystem.actions.FindAction("NextRequest").performed += ctx => NextLine();
+
+    }
+
+    public void OnDestroy()
+    {
+        InputSystem.actions.FindAction("NextRequest").performed -= ctx => NextLine();
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        loadText(DialogueLines[CurrentLineIndex]);
+        if (LoadedDialogueLines.Count > 0)
+        {
+            loadText(LoadedDialogueLines[CurrentLineIndex]);
+        }
+        
     }
 
     // Update is called once per frame
@@ -28,23 +53,21 @@ public class DialougeSystem : MonoBehaviour
         
     }
 
-    [System.Serializable]
-    public struct DialogueLine
-    {
-        [TextArea(3, 10)]
-        public string Line;
-        public DialogueEmotion Emotion;
-        public DialogueLine(DialogueEmotion emotion, string line)
-        {
-            Emotion = emotion;
-            Line = line;
-        }
-    }
+
 
     public void loadText(DialogueLine chosenline)
     {
         PlayerDialougeText.text = chosenline.Line;
-        CurrentEmotion = chosenline.Emotion;
+        playerImage.sprite = EmotionSprites[(int)chosenline.Emotion];
+    }
+
+    public void NextLine()
+    {
+        if (CurrentLineIndex + 1 < LoadedDialogueLines.Count)
+        {
+            CurrentLineIndex++;
+            loadText(LoadedDialogueLines[CurrentLineIndex]);
+        }
     }
 }
 
@@ -54,5 +77,19 @@ public enum DialogueEmotion
     Happy,
     Sad,
     Angry,
-    Surprised
+    Surprised,
+    Confident
+}
+
+[System.Serializable]
+public struct DialogueLine
+{
+    [TextArea(3, 10)]
+    public string Line;
+    public DialogueEmotion Emotion;
+    public DialogueLine(DialogueEmotion emotion, string line)
+    {
+        Emotion = emotion;
+        Line = line;
+    }
 }
