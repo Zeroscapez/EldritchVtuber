@@ -25,8 +25,26 @@ public class TestButtonControl : MonoBehaviour
     public void OnButtonClicked()
     {
         Debug.Log("Button was clicked!");
-        RequestSystem.Instance.StartCoroutine(RequestSystem.Instance.CompleteSpecificRequest(1));
+
+        if (GameManager.Instance.GetCurrentDay() == DayOfWeek.Tutorial)
+        {
+            StartTutorialScene1();
+        }
     }
 
+    public void StartTutorialScene1()
+    {
+       
 
+        if (RequestSystem.Instance.CurrentRequest != null && RequestSystem.Instance.CurrentRequest.RequestID == 0 )
+        {
+            Debug
+                .Log("Completing Tutorial Request");
+            RequestSystem.Instance.StartCoroutine(RequestSystem.Instance.CompleteRequest());
+        }
+
+        DialougeSystem.Instance.LoadDialouge("Tutorial Scene 1");
+        
+
+    }
 }
