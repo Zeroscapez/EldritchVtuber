@@ -42,13 +42,13 @@ public class RequestSystem : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        InputSystem.actions.FindAction("NextRequest").performed += ctx => NextRequest();
+     
 
     }
 
     public void OnDestroy()
     {
-        InputSystem.actions.FindAction("NextRequest").performed -= ctx => NextRequest();
+       
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

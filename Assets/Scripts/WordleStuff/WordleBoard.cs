@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class WordleBoard : MonoBehaviour
@@ -9,13 +11,25 @@ public class WordleBoard : MonoBehaviour
    
 
     private WordleRow[] rows;
+
+    private string[] solutions;
+    private string[] validWords;
+
+
     [SerializeField] private int rowIndex;
     [SerializeField] private int columnIndex;
     
-    [SerializeField] private string targetWord = "APPLE";
+    private string targetWord = "APPLE";
     [SerializeField] private string currentGuess = "";
     private int attempts = 0;
 
+
+    [Header("States")]
+    public WordleTile.State emptyState;
+    public WordleTile.State occupiedState;
+    public WordleTile.State correctState;
+    public WordleTile.State wrongSpotState;
+    public WordleTile.State incorrectState;
 
     InputAction typeLetter;
     InputAction removeLetter;
@@ -44,6 +58,12 @@ public class WordleBoard : MonoBehaviour
 
     public void Start()
     {
+       TextAsset textfile = Resources.Load("official_wordle_all") as TextAsset;
+       validWords = textfile.text.Split('\n');
+
+        textfile = Resources.Load("official_wordle_common") as TextAsset;
+        solutions = textfile.text.Split('\n');
+
         StartWordle();
     }
 
@@ -58,15 +78,22 @@ public class WordleBoard : MonoBehaviour
 
     public void StartWordle() 
     {
-
+        SetRandomWord();
         PlayerControlManager.Instance.EnablePlayerControl(false);
         InputSystem.actions.FindActionMap("Wordle").Enable();
+        
     }
 
     public void EndWordle()
     {
         PlayerControlManager.Instance.EnablePlayerControl(true);
         InputSystem.actions.FindActionMap("Wordle").Disable();
+    }
+
+    private void SetRandomWord()
+    {
+        targetWord = solutions[Random.Range(0, solutions.Length)];
+        targetWord = targetWord.ToLower().Trim();
     }
 
 
@@ -93,14 +120,14 @@ public class WordleBoard : MonoBehaviour
             {
                 if (key.wasPressedThisFrame && key.displayName.Length == 1)
                 {
-                    char pressedChar = key.displayName[0];
+                    char pressedChar = key.displayName.ToLower()[0];
                  
 
                     if(char.IsLetter(pressedChar))
                     {
-                        currentGuess += key.displayName;
-                        Debug.Log("Current Guess: " + currentGuess);
+                      
                         rows[rowIndex].tiles[columnIndex].SetLetter(pressedChar);
+                        rows[rowIndex].tiles[columnIndex].SetState(emptyState);
                         columnIndex++;
                     }
                     
@@ -112,6 +139,7 @@ public class WordleBoard : MonoBehaviour
 
     public void OnLetterRemoved()
     {
+        
         if(!removeLetter.WasPressedThisFrame())
         {
             return;
@@ -119,43 +147,68 @@ public class WordleBoard : MonoBehaviour
 
         columnIndex = Mathf.Max(columnIndex - 1, 0);
         rows[rowIndex].tiles[columnIndex].SetLetter('\0');
-        
+        rows[rowIndex].tiles[columnIndex].SetState(emptyState);
+
+
     }
 
     public void OnRowSubmit(WordleRow row)
     {
+
+        
         if(!submitRow.WasPressedThisFrame())
         {
             return;
         }
 
-        if(columnIndex < row.tiles.Length)
+        if (!IsValidWord(row.word))
         {
-            Debug.Log("Not enough letters");
+            Debug.Log("Not a valid word!");
             return;
         }
-        for (int i = 0; i < row.tiles.Length; i++)
+        string remaining = targetWord;
+
+
+        for(int i = 0; i < row.tiles.Length; i++)
         {
             WordleTile tile = row.tiles[i];
 
             if(tile.letter == targetWord[i])
             {
-                Debug.Log("Correct letter in correct position");
-            }
-            else if(targetWord.Contains(tile.letter))
-            {
-                Debug.Log("Correct letter in wrong position");
-            }
-            else
-            {
-                Debug.Log("Incorrect letter");
-            }
+                tile.SetState(correctState);
 
+                remaining = remaining.Remove(i, 1);
+                remaining = remaining.Insert(i, " ");
+            }
+            else if (!targetWord.Contains(tile.letter))
+            {
+                tile.SetState(incorrectState);
+            }
+        }
+
+        for(int i = 0; i < row.tiles.Length; i++)
+        {
+            WordleTile tile = row.tiles[i];
+
+            if(tile.state != correctState && tile.state != incorrectState)
+            {
+               if(remaining.Contains(tile.letter))
+                {
+                    tile.SetState(wrongSpotState);
+
+                    int index = remaining.IndexOf(tile.letter);
+                    remaining = remaining.Remove(i, 1).Insert(i, " ");
+                }
+                else
+                {
+                    tile.SetState(incorrectState);
+                }
+            }
         }
 
         rowIndex++;
         columnIndex = 0;
-        currentGuess = "";
+
         if (rowIndex >= rows.Length)
         {
             Debug.Log("No more attempts left!");
@@ -165,4 +218,15 @@ public class WordleBoard : MonoBehaviour
     }
   
 
+    private bool IsValidWord(string word)
+    {
+        for (int i = 0; i < validWords.Length; i++)
+        {
+            if(validWords[i] == word)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
