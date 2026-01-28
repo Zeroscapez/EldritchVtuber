@@ -9,22 +9,28 @@ public class WhacAMoleGame : MonoBehaviour
     public GameObject startScreen;
     public GameObject gameUI;
     public GameObject gameOverScreen;
+
     [Header("HUD")]
     public TMP_Text scoreText;
     public TMP_Text timerText;
     public TMP_Text finalScoreText;
+
     [Header("Game References")]
     public RectTransform gameArea;
     public Button molePrefab;
     public RectTransform[] holes;
+
     [Header("Settings")]
     public float gameTime = 30f;
     public float minShowTime = 0.6f;
     public float maxShowTime = 1.2f;
+    public Vector3 moleOffset = new Vector3(0, 20, 0); 
+
     private Button[] moles;
     private bool gameRunning = false;
     private int score = 0;
     private float timeRemaining;
+
 
     void Start()
     {
@@ -32,6 +38,7 @@ public class WhacAMoleGame : MonoBehaviour
         gameUI.SetActive(false);
         gameOverScreen.SetActive(false);
     }
+
     public void StartGame()
     {
         startScreen.SetActive(false);
@@ -74,10 +81,7 @@ public class WhacAMoleGame : MonoBehaviour
             Button mole = moles[index];
             RectTransform hole = holes[index];
             RectTransform rt = mole.GetComponent<RectTransform>();
-
-            rt.anchorMin = hole.anchorMin;
-            rt.anchorMax = hole.anchorMax;
-            rt.anchoredPosition = hole.anchoredPosition;
+            rt.position = hole.position + moleOffset;
 
             mole.gameObject.SetActive(true);
 
@@ -87,6 +91,7 @@ public class WhacAMoleGame : MonoBehaviour
             mole.gameObject.SetActive(false);
         }
     }
+
     IEnumerator TimerRoutine()
     {
         while (timeRemaining > 0)
@@ -98,6 +103,7 @@ public class WhacAMoleGame : MonoBehaviour
 
         EndGame();
     }
+
     void WhackMole(int index)
     {
         if (!gameRunning) return;
@@ -108,14 +114,17 @@ public class WhacAMoleGame : MonoBehaviour
 
         moles[index].gameObject.SetActive(false);
     }
+
     void UpdateScore()
     {
         scoreText.text = "Score: " + score;
     }
+
     void UpdateTimer()
     {
         timerText.text = "Time: " + Mathf.CeilToInt(timeRemaining);
     }
+
     void EndGame()
     {
         gameRunning = false;
