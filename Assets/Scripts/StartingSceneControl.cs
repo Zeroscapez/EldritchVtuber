@@ -12,13 +12,10 @@ public class StartingSceneControl : MonoBehaviour
     void Start()
     {
         dialougeActivator = GetComponent<DialougeActivator>();
-        dialougeActivator.ActivateDialouge();
-        RequestSystem.Instance.currentDay = DayOfWeek.Tutorial;
+       
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  
+
+    
 }

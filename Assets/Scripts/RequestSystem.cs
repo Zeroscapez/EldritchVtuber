@@ -20,13 +20,13 @@ public class RequestSystem : MonoBehaviour
 {
     public static RequestSystem Instance;
     public TextMeshProUGUI requestNameText;
-    public RequestData CurrentRequest;
-    [SerializeField] private List<RequestData> AvailableRequests = new List<RequestData>();
-    public List<RequestData> AvailableRequestsMonday = new List<RequestData>();
-    public List<RequestData> AvailableRequestsTuesday = new List<RequestData>();
-    public List<RequestData> AvailableRequestsWednesday = new List<RequestData>();
-    public List<RequestData> AvailbleRequestTutorial = new List<RequestData>();
-    public DayOfWeek currentDay;
+    public RequestLogic CurrentRequest;
+    public List<RequestLogic> AvailableRequests = new List<RequestLogic>();
+    public List<RequestLogic> AvailableRequestsMonday = new List<RequestLogic>();
+    public List<RequestLogic> AvailableRequestsTuesday = new List<RequestLogic>();
+    public List<RequestLogic> AvailableRequestsWednesday = new List<RequestLogic>();
+    public List<RequestLogic> AvailbleRequestTutorial = new List<RequestLogic>();
+
     public bool isRequestActive = false;
     public int currentApprovalRating = 0;
 
@@ -42,19 +42,18 @@ public class RequestSystem : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        InputSystem.actions.FindAction("NextRequest").performed += ctx => NextRequest();
+     
 
     }
 
     public void OnDestroy()
     {
-        InputSystem.actions.FindAction("NextRequest").performed -= ctx => NextRequest();
+       
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        SetDayList(currentDay);
-        SetRequest();
+       
     }
 
     // Update is called once per frame
@@ -63,12 +62,18 @@ public class RequestSystem : MonoBehaviour
        
     }
 
+    public void InitializeDay()
+    {
+        SetDayList(GameManager.Instance.GetCurrentDay());
+        SetRequest();
+    }
+
     public void StartRequest(int i) //Debug purposes, can select which request to start
     {
         CurrentRequest = AvailableRequests[i];
-        requestNameText.text = CurrentRequest.QuestName;
-        CurrentRequest.IsCompleted = false;
-        CurrentRequest.IsActive = true;
+        requestNameText.text = CurrentRequest.refRequest.QuestName;
+        CurrentRequest.refRequest.IsCompleted = false;
+        CurrentRequest.refRequest.IsActive = true;
     }
 
     public void NextRequest()
@@ -89,10 +94,11 @@ public class RequestSystem : MonoBehaviour
 
     public void SetRequest()
     {
+        
         CurrentRequest = AvailableRequests[0];
-        requestNameText.text = CurrentRequest.QuestName;
-        CurrentRequest.IsCompleted = false;
-        CurrentRequest.IsActive = true;
+        requestNameText.text = CurrentRequest.refRequest.QuestName;
+        CurrentRequest.refRequest.IsCompleted = false;
+        CurrentRequest.refRequest.IsActive = true;
         isRequestActive = true;
     }
 
@@ -105,11 +111,11 @@ public class RequestSystem : MonoBehaviour
 
         if (isRequestActive == true)
         { 
-        CurrentRequest.IsCompleted = true;
-        CurrentRequest.IsActive = false;
-        currentApprovalRating += CurrentRequest.ApprovalAmount;
+        CurrentRequest.refRequest.IsCompleted = true;
+            CurrentRequest.refRequest.IsActive = false;
+            currentApprovalRating += CurrentRequest.refRequest.ApprovalAmount;
 
-        StreamOverlayUIControl.OnApprovalChange?.Invoke();
+            StreamOverlayUIControl.OnApprovalChange?.Invoke();
         AvailableRequests.Remove(CurrentRequest);
         isRequestActive = false;
         yield return new WaitForSeconds(2f);
@@ -123,13 +129,13 @@ public class RequestSystem : MonoBehaviour
         {
             yield break;
         }
-        RequestData specificRequest = AvailableRequests[index];
-        if (specificRequest.IsCompleted == false)
+        RequestLogic specificRequest = AvailableRequests[index];
+        if (specificRequest.refRequest == false)
         {
-            Debug.Log("Completing Specific Request: " + specificRequest.QuestName);
-            specificRequest.IsCompleted = true;
-            specificRequest.IsActive = false;
-            currentApprovalRating += specificRequest.ApprovalAmount;
+            Debug.Log("Completing Specific Request: " + specificRequest.refRequest);
+            specificRequest.refRequest.IsCompleted = true;
+            specificRequest.refRequest.IsActive = false;
+            currentApprovalRating += specificRequest.refRequest.ApprovalAmount;
             StreamOverlayUIControl.OnApprovalChange?.Invoke();
             AvailableRequests.Remove(specificRequest);
             isRequestActive = false;
@@ -159,5 +165,4 @@ public class RequestSystem : MonoBehaviour
         }
     }
 
-    
 }

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: TestRequest
   m_EditorClassIdentifier: Assembly-CSharp::RequestData
   QuestID: 0
-  QuestName: Eat Burger
-  IsCompleted: 0
+  QuestName: Push the Button
+  IsActive: 1
   Description: Eat burger
   ApprovalAmount: 12
+  IsCompleted: 0
