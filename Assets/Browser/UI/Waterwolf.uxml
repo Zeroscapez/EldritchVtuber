@@ -35,9 +35,4 @@
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="Container" style="flex-grow: 1; position: absolute;">
-        <ui:VisualElement name="new-page" style="flex-grow: 1; position: absolute; background-size: 1920px 100%; background-color: rgb(240, 240, 240); width: 1920px; height: 1000px; top: 81px; left: 1px; align-self: center; justify-content: center;">
-            <ui:Label text="WIP" style="align-self: center; justify-content: center; align-items: center; top: 200px; height: 276px; width: 422px; font-size: 45px; -unity-font-style: bold;"/>
-        </ui:VisualElement>
-    </ui:VisualElement>
 </ui:UXML>
