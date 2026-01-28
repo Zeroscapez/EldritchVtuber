@@ -1,0 +1,3 @@
+<ui:VisualElement xmlns:ui="UnityEngine.UIElements">
+    <Label text="Home Page"/>
+</ui:VisualElement>

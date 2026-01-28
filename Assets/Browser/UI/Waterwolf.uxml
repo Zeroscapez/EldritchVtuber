@@ -1,0 +1,38 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Browser/UI/WaterwolfStyle.uss?fileID=7433441132597879392&amp;guid=bfc90253b39d8364b944e85a97bda8d1&amp;type=3#WaterwolfStyle"/>
+    <Style src="project://database/Assets/Browser/UI/Websitebutton.uss?fileID=7433441132597879392&amp;guid=32676105df736244295d74e3e7593244&amp;type=3#Websitebutton"/>
+    <ui:VisualElement class="root">
+        <ui:VisualElement class="tabs-bar" style="background-color: rgb(70, 142, 178);">
+            <ui:Label text="Tab 1" class="tab active" style="-unity-text-outline-color: rgb(24, 134, 178); background-color: rgb(3, 56, 106);"/>
+            <ui:Label text="Tab 2" class="tab" style="background-color: rgb(4, 57, 107);"/>
+            <ui:Label text="+" class="tab add-tab" style="background-color: rgb(4, 57, 107);"/>
+        </ui:VisualElement>
+        <ui:VisualElement class="toolbar" style="background-color: rgb(47, 122, 172);">
+            <ui:Button text="?" class="toolbar-btn" style="background-image: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-1008301579157283121&amp;guid=dd491b20041cef44980a5d910a3d085e&amp;type=3#arrow-left@2x&quot;); -unity-font-definition: initial; -unity-background-image-tint-color: rgb(0, 0, 0);"/>
+            <ui:Button text="?" class="toolbar-btn" style="-unity-font-definition: initial; background-image: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-1087164816274819069&amp;guid=dd491b20041cef44980a5d910a3d085e&amp;type=3#arrow-right@2x&quot;); -unity-background-image-tint-color: rgb(2, 0, 0);"/>
+            <ui:Button text="?" class="toolbar-btn" style="background-image: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=5866165431930342980&amp;guid=dd491b20041cef44980a5d910a3d085e&amp;type=3#Remove@2x&quot;);"/>
+            <ui:TextField class="address-bar"/>
+        </ui:VisualElement>
+        <ui:VisualElement class="page" style="background-color: rgb(1, 52, 118);">
+            <ui:Label text="Waterwolf" class="page-title"/>
+            <ui:TextField class="search-bar"/>
+            <ui:VisualElement class="shortcuts" style="top: 75px; align-items: center;">
+                <ui:VisualElement class="shortcut" style="background-color: rgb(27, 108, 164);"/>
+                <ui:VisualElement class="shortcut" style="background-color: rgb(27, 108, 164);"/>
+                <ui:VisualElement class="shortcut" style="background-color: rgb(27, 108, 164); justify-content: center; align-items: center; align-self: center; background-size: 300px 300px; height: 75px; width: 75px;">
+                    <ui:Button text="Button" class="button-big" style="width: 65px; height: 65px; background-image: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-6527069497977903076&amp;guid=dd491b20041cef44980a5d910a3d085e&amp;type=3#console.warnicon@2x&quot;); background-color: rgb(27, 108, 164); border-top-left-radius: 12px; border-top-right-radius: 12px; border-bottom-right-radius: 12px; border-bottom-left-radius: 12px;"/>
+                </ui:VisualElement>
+                <ui:VisualElement class="shortcut" style="background-color: rgb(27, 108, 164);"/>
+                <ui:VisualElement class="shortcut" style="background-color: rgb(27, 108, 164);"/>
+            </ui:VisualElement>
+            <ui:VisualElement class="cards" style="align-self: center; align-items: stretch; bottom: 0; top: 200px;">
+                <ui:VisualElement class="card" style="background-color: rgb(27, 108, 164);"/>
+                <ui:VisualElement class="card" style="background-color: rgb(27, 108, 164);"/>
+                <ui:VisualElement class="card" style="background-color: rgb(27, 108, 164); background-image: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/G_N8HoTWgAED-2U.png?fileID=2800000&amp;guid=bc46a64900d12e04baa6e6ac6db2a20e&amp;type=3#G_N8HoTWgAED-2U&quot;);"/>
+                <ui:VisualElement class="card" style="background-color: rgb(27, 108, 164); background-image: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/maxresdefault-4079698387.jpg?fileID=2800000&amp;guid=5a9a735398f653b458e03869e0174379&amp;type=3#maxresdefault-4079698387&quot;);"/>
+                <ui:VisualElement class="card" style="background-color: rgb(27, 108, 164);"/>
+                <ui:VisualElement style="flex-grow: 1; background-color: rgb(27, 108, 164);"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
