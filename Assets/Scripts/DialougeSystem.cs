@@ -55,9 +55,18 @@ public class DialougeSystem : MonoBehaviour
 
     public IEnumerator LoadDialouge(string sceneName)
     {
+        
         LoadedDialogueLines.Clear();
         CurrentLineIndex = 0;
         var dayScene = CreatedScenes.Find(scene => scene.SceneName == sceneName);
+
+        if(dayScene.SceneCompleted)
+        {
+            DialogueLine emptyLine = new DialogueLine(DialogueEmotion.Neutral, "");
+            loadText(emptyLine);
+            IsDialogueActive = false;
+            yield break;
+        }
         currentScene = dayScene;
         AutoAdvance = currentScene.AutoAdvance;
 
@@ -88,7 +97,12 @@ public class DialougeSystem : MonoBehaviour
         }
         else
         {
-           DialogueLine emptyLine = new DialogueLine(DialogueEmotion.Neutral, "");
+            if(currentScene!= null)
+            {
+                //currentScene.SceneCompleted = true;
+            }
+         
+            DialogueLine emptyLine = new DialogueLine(DialogueEmotion.Neutral, "");
             loadText(emptyLine);
             IsDialogueActive = false;
         }
