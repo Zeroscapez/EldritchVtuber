@@ -4,30 +4,22 @@ using UnityEngine.UI;
 public class HyperLinkController : MonoBehaviour
 {
     private Button buttonRef;
-    public GameObject websiteObject;
+    public GameObject website1;
     
 
     public void Awake()
     {
         buttonRef = GetComponent<Button>();
-        buttonRef.onClick.AddListener(OpenLink);
+        buttonRef.onClick.AddListener(OpenPanel);
 
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void OpenPanel()
     {
-        
+        website1.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ClosePanel()
     {
-        
-    }
-
-    public void OpenLink()
-    {
-      BrowserUI.Instance.OpenWebsite(websiteObject);
-
+     website1?.SetActive(false);
     }
 }
