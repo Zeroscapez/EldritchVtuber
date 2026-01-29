@@ -98,11 +98,22 @@ public class DialougeSystem : MonoBehaviour
 public enum DialogueEmotion
 {
     Neutral,
-    Happy,
-    Sad,
-    Angry,
-    Surprised,
-    Confident
+    Joy,
+    Fear,
+    Smug,
+    Pout,
+    Cry,
+    Confused,
+    Nervous
+}
+
+public class EmotionSpritePair
+{
+    public DialogueEmotion Emotion;
+    public Sprite EmotionSprite;
+
+   
+
 }
 
 [System.Serializable]
@@ -116,6 +127,8 @@ public struct DialogueLine
         Emotion = emotion;
         Line = line;
     }
+
+ 
 }
 
 //[System.Serializable]
