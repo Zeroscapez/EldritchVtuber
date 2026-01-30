@@ -13,6 +13,7 @@ public class MemoryCardsController : MonoBehaviour
     private List<Sprite> spritePairs;
 
     public GameObject victoryScreen;
+    public GameObject memoryGame;
 
     MemoryCard firstSelected;
     MemoryCard secondSelected;
@@ -87,6 +88,8 @@ public class MemoryCardsController : MonoBehaviour
             {
                 //game clear
                 victoryScreen.SetActive(true);
+                StartCoroutine(EndGame());
+               
             }
         }
         else
@@ -95,6 +98,12 @@ public class MemoryCardsController : MonoBehaviour
             a.HideCard();
             b.HideCard();
         }
+    }
+
+    IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(2);
+        memoryGame.SetActive(false);
     }
 
     //Shuffles a list of sprites
