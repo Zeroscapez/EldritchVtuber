@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class MemoryCard : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class MemoryCard : MonoBehaviour
 
     public bool isSelected;
 
+    public MemoryCardsController controller;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,6 +25,11 @@ public class MemoryCard : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void OnCardClick()
+    {
+        controller.SetSelected(this);
     }
 
     public void SetIconSprite(Sprite sp)
@@ -36,7 +45,7 @@ public class MemoryCard : MonoBehaviour
 
     public void HideCard()
     {
-        iconImage.sprite = iconSprite;
-        isSelected = true;
+        iconImage.sprite = hiddenIconSprite;
+        isSelected = false;
     }
 }
