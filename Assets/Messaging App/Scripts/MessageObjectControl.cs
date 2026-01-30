@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class MessageObjectControl : MonoBehaviour
 {
-    public DialogueLine correspondingLine;
+
     public TextMeshProUGUI messageText;
     public TextMeshProUGUI messageSender;
     
 
     private void OnEnable()
     {
-        correspondingLine.Line = null;
+   
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

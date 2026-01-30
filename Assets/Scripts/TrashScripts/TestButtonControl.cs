@@ -26,10 +26,7 @@ public class TestButtonControl : MonoBehaviour
     {
         Debug.Log("Button was clicked!");
 
-        if (GameManager.Instance.GetCurrentDay() == DayOfWeek.Tutorial)
-        {
-            StartTutorialScene1();
-        }
+        GameManager.Instance.dialogueBoxDialogueRunner.StartDialogue("PushedButton");
     }
 
     public void StartTutorialScene1()
@@ -43,7 +40,7 @@ public class TestButtonControl : MonoBehaviour
             RequestSystem.Instance.StartCoroutine(RequestSystem.Instance.CompleteRequest());
         }
 
-        DialougeSystem.Instance.LoadDialouge("Push Button");
+      
         
 
     }

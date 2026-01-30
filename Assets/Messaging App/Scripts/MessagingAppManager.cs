@@ -1,16 +1,18 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Yarn;
+using Yarn.Unity;
 
 public class MessagingAppManager : MonoBehaviour
 {
     public static MessagingAppManager Instance;
-    public Scrollbar Scrollbar;
     public GameObject MessagePrefab;
     public Transform MessageTransform;
     public List<GameObject> MessageList;
-
+    private DialogueRunner messageAppRunner;
 
     public void Awake()
     {
@@ -23,12 +25,22 @@ public class MessagingAppManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        messageAppRunner = GameManager.Instance.messageAppDialogueRunner;
+
+        // Subscribe to dialogue completion
+        messageAppRunner.onDialogueComplete.AddListener(OnMessageDialogueComplete);
+    }
+
+    public void OnEnable()
+    {
+        StartCoroutine(LoadMessages());
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-       
+        
     }
 
     // Update is called once per frame
@@ -37,14 +49,19 @@ public class MessagingAppManager : MonoBehaviour
      
     }
 
-    public void CreateMessage(DialogueLine messageInfo)
+    public IEnumerator LoadMessages()
     {
-       
-        GameObject newMessage = Instantiate(MessagePrefab, MessageTransform);
-        MessageObjectControl messageText = newMessage.GetComponent<MessageObjectControl>();
+        yield return new WaitForSeconds(1);
 
-        messageText.correspondingLine = messageInfo;
-        MessageList.Add(newMessage);
-       
+        GameManager.Instance.messageDialouge("Start");
     }
+
+    private void OnMessageDialogueComplete()
+    {
+        // Unsubscribe to avoid repeated calls
+        messageAppRunner.onDialogueComplete.RemoveListener(OnMessageDialogueComplete);
+
+        GameManager.Instance.CrystalDialogue("CrystalSpeak");
+    }
+
 }

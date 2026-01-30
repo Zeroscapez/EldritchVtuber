@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public class GenericSceneDialouge : MonoBehaviour
+public class AppLoaderManager : MonoBehaviour
 {
+    public GameObject messagingAppPrefab;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameStartDialouge();
+        
     }
 
     // Update is called once per frame
@@ -14,8 +15,8 @@ public class GenericSceneDialouge : MonoBehaviour
         
     }
 
-    void GameStartDialouge()
+    public void OpenMessagingApp()
     {
-      
+        messagingAppPrefab.SetActive(true);
     }
 }

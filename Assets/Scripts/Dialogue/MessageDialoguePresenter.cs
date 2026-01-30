@@ -22,10 +22,6 @@ public class MessageDialoguePresenter : DialoguePresenterBase
     [Header("Timing")]
     [SerializeField] float delayAfterLine = 1f;
 
-    [SerializeField] float minimumTypingDelay = 0.5f;
-    [SerializeField] float maximumTypingDelay = 3f;
-    [SerializeField] float typingDelayPerCharacter = 0.05f;
-    [SerializeField] bool showTypingIndicators = true;
 
     public override  YarnTask OnDialogueStartedAsync() => YarnTask.CompletedTask;
    
