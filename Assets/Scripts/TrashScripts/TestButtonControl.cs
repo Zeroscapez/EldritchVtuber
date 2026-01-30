@@ -43,7 +43,7 @@ public class TestButtonControl : MonoBehaviour
             RequestSystem.Instance.StartCoroutine(RequestSystem.Instance.CompleteRequest());
         }
 
-        DialougeSystem.Instance.LoadDialouge("Tutorial Scene 1");
+        DialougeSystem.Instance.LoadDialouge("Push Button");
         
 
     }

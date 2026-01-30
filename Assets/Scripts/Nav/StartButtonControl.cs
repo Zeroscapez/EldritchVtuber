@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class GenericSceneDialouge : MonoBehaviour
+public class StartButtonControl : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameStartDialouge();
+        
     }
 
     // Update is called once per frame
@@ -14,8 +14,8 @@ public class GenericSceneDialouge : MonoBehaviour
         
     }
 
-    void GameStartDialouge()
+    public void OnStartButtonPressed()
     {
-        DialougeSystem.Instance.LoadDialouge("Game Start");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("GameplayScene");
     }
 }

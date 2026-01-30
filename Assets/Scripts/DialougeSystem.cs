@@ -15,12 +15,18 @@ public class DialougeSystem : MonoBehaviour
     public Image playerImage;
     public Sprite[] EmotionSprites;
     public TextMeshProUGUI PlayerDialougeText;
+    public GameObject DialougeBox;
     public DialogueEmotion CurrentEmotion = DialogueEmotion.Neutral;
     public bool IsDialogueActive = false;
     public List<SceneMakerObject> CreatedScenes = new List<SceneMakerObject>();
     public SceneMakerObject currentScene;
     public List<DialogueLine> LoadedDialogueLines = new List<DialogueLine>();
     public bool AutoAdvance = false;
+
+
+    [Header("Messaging App Dialouge")]
+    public Transform MessageAppDialougePanel;
+    public GameObject MessagingAppMessagePrefab;
     public void Awake()
     {
         if (Instance == null)
@@ -46,14 +52,15 @@ public class DialougeSystem : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-      
-        LoadDialouge("Scene 0");
 
-
+        //PlayerDialougeText.text = "";
+        //DialougeBox.SetActive(false);
     }
 
+  
 
-    public IEnumerator LoadDialouge(string sceneName)
+
+    public void LoadDialouge(string sceneName)
     {
         
         LoadedDialogueLines.Clear();
@@ -62,30 +69,46 @@ public class DialougeSystem : MonoBehaviour
 
         if(dayScene.SceneCompleted)
         {
-            DialogueLine emptyLine = new DialogueLine(DialogueEmotion.Neutral, "");
+            DialogueLine emptyLine = new DialogueLine(Actor.Crystal,DialougeLineType.DialougeBox,DialogueEmotion.Neutral, "");
             loadText(emptyLine);
             IsDialogueActive = false;
-            yield break;
+           
         }
         currentScene = dayScene;
         AutoAdvance = currentScene.AutoAdvance;
 
-        yield return new WaitForSeconds(0.3f);
-        LoadedDialogueLines = currentScene.DialogueLines;
-        loadText(LoadedDialogueLines[CurrentLineIndex]);
+        StartCoroutine(WaitforDialouge());
 
 
     }
+
+    public IEnumerator WaitforDialouge()
+    {
+        yield return new WaitForSeconds(0.3f);
+        LoadedDialogueLines = currentScene.DialogueLines;
+        loadText(LoadedDialogueLines[CurrentLineIndex]);
+    }
+
    
 
 
-
-
-    public void loadText(DialogueLine chosenline)
+    private void loadText(DialogueLine chosenline)
     {
-        PlayerDialougeText.text = chosenline.Line;
-        playerImage.sprite = EmotionSprites[(int)chosenline.Emotion];
-        IsDialogueActive = true;
+        if(chosenline.LineType == DialougeLineType.DialougeBox)
+        {
+            DialougeBox.SetActive(true);
+            PlayerDialougeText.text = chosenline.Line;
+            //playerImage.sprite = EmotionSprites[(int)chosenline.Emotion];
+            IsDialogueActive = true;
+        }
+
+        if(chosenline.LineType == DialougeLineType.MessageApp)
+        {
+            MessagingAppManager.Instance.CreateMessage(chosenline);
+            //playerImage.sprite = EmotionSprites[(int)chosenline.Emotion];
+            IsDialogueActive = true;
+        }
+      
     }
 
     public void NextLine()
@@ -102,8 +125,9 @@ public class DialougeSystem : MonoBehaviour
                 //currentScene.SceneCompleted = true;
             }
          
-            DialogueLine emptyLine = new DialogueLine(DialogueEmotion.Neutral, "");
+            DialogueLine emptyLine = new DialogueLine(Actor.Crystal,DialougeLineType.DialougeBox,DialogueEmotion.Neutral, "");
             loadText(emptyLine);
+           // DialougeBox.SetActive(false);
             IsDialogueActive = false;
         }
     }
@@ -135,14 +159,29 @@ public struct DialogueLine
 {
     [TextArea(3, 10)]
     public string Line;
+    public Actor Actor;
     public DialogueEmotion Emotion;
-    public DialogueLine(DialogueEmotion emotion, string line)
+    public DialougeLineType LineType;
+    public DialogueLine(Actor actor, DialougeLineType linetype, DialogueEmotion emotion, string line)
     {
+        Actor = actor;
         Emotion = emotion;
         Line = line;
+        LineType = linetype;
     }
 
  
+}
+
+public enum Actor
+{
+    Crystal,
+    Manager
+}
+public enum DialougeLineType
+{
+    MessageApp,
+    DialougeBox
 }
 
 //[System.Serializable]
@@ -156,6 +195,7 @@ public struct DialogueLine
 [System.Serializable]
 public struct SceneDialouge
 {
+    public Actor Actor;
     public string SceneName;
     public List<DialogueLine> DialogueLines;
     public bool SceneCompleted;

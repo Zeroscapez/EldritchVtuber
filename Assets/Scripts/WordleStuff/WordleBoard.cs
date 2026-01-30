@@ -22,7 +22,7 @@ public class WordleBoard : MonoBehaviour
     
     private string targetWord = "APPLE";
     [SerializeField] private string currentGuess = "";
-    private int attempts = 0;
+
 
 
     [Header("States")]

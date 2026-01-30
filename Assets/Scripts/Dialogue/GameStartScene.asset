@@ -15,9 +15,34 @@ MonoBehaviour:
   SceneID: 0
   SceneName: Game Start
   DialogueLines:
-  - Line: wwwwww
+  - Line: Morning Crystal, ready for your debut?
+    Actor: 1
     Emotion: 0
-  - Line: PSSSSS
-    Emotion: 3
+    LineType: 0
+  - Line: I-I uh, I think so!
+    Actor: 0
+    Emotion: 7
+    LineType: 0
+  - Line: You mean, you know so, just need to make sure you have everything in tip-top
+      shape, you gullible meatbag.
+    Actor: 1
+    Emotion: 7
+    LineType: 0
+  - Line: W-what?
+    Actor: 0
+    Emotion: 6
+    LineType: 0
+  - Line: "Haha, it\u2019s a friendly saying."
+    Actor: 1
+    Emotion: 6
+    LineType: 0
+  - Line: 'Oh, okay. : )'
+    Actor: 1
+    Emotion: 1
+    LineType: 0
+  - Line: Dialogue Test
+    Actor: 0
+    Emotion: 1
+    LineType: 1
   SceneCompleted: 0
   AutoAdvance: 0

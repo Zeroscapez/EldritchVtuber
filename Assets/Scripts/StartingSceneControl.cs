@@ -12,7 +12,10 @@ public class StartingSceneControl : MonoBehaviour
     void Start()
     {
         dialougeActivator = GetComponent<DialougeActivator>();
-       
+        //DialougeSystem.Instance.LoadDialouge("Scene 0");
+        DialougeSystem.Instance.playerImage.sprite = DialougeSystem.Instance.EmotionSprites[0];
+        DialougeSystem.Instance.PlayerDialougeText.text = "";
+
     }
 
   
