@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -24,13 +24,11 @@ public class WhacAMoleGame : MonoBehaviour
     public float gameTime = 30f;
     public float minShowTime = 0.6f;
     public float maxShowTime = 1.2f;
-    public Vector3 moleOffset = new Vector3(0, 20, 0); 
 
     private Button[] moles;
     private bool gameRunning = false;
     private int score = 0;
     private float timeRemaining;
-
 
     void Start()
     {
@@ -57,14 +55,29 @@ public class WhacAMoleGame : MonoBehaviour
         StartCoroutine(MoleRoutine());
         StartCoroutine(TimerRoutine());
     }
+
     void CreateMoles()
     {
         moles = new Button[holes.Length];
 
         for (int i = 0; i < holes.Length; i++)
         {
-            Button mole = Instantiate(molePrefab, gameArea);
-            mole.gameObject.SetActive(false);
+            Button mole = Instantiate(molePrefab, holes[i]);
+
+            RectTransform moleRT = mole.GetComponent<RectTransform>();
+            RectTransform holeRT = holes[i];
+
+            Vector2 offset = new Vector2(
+                (holeRT.rect.width * (0.5f - holeRT.pivot.x)) +
+                (moleRT.rect.width * (moleRT.pivot.x - 0.5f)),
+                (holeRT.rect.height * (0.5f - holeRT.pivot.y)) +
+                (moleRT.rect.height * (moleRT.pivot.y - 0.5f))
+            );
+            moleRT.anchoredPosition = offset;
+            moleRT.localScale = Vector3.one;
+
+            mole.gameObject.SetActive(true);
+            mole.image.enabled = false;
 
             int index = i;
             mole.onClick.AddListener(() => WhackMole(index));
@@ -72,23 +85,20 @@ public class WhacAMoleGame : MonoBehaviour
             moles[i] = mole;
         }
     }
+
     IEnumerator MoleRoutine()
     {
         while (gameRunning)
         {
             int index = Random.Range(0, moles.Length);
-
             Button mole = moles[index];
-            RectTransform hole = holes[index];
-            RectTransform rt = mole.GetComponent<RectTransform>();
-            rt.position = hole.position + moleOffset;
 
-            mole.gameObject.SetActive(true);
+            mole.image.enabled = true; // show mole
 
             float showTime = Random.Range(minShowTime, maxShowTime);
             yield return new WaitForSeconds(showTime);
 
-            mole.gameObject.SetActive(false);
+            mole.image.enabled = false; // hide mole
         }
     }
 
@@ -107,12 +117,11 @@ public class WhacAMoleGame : MonoBehaviour
     void WhackMole(int index)
     {
         if (!gameRunning) return;
-        if (!moles[index].gameObject.activeSelf) return;
+        if (!moles[index].image.enabled) return;
 
         score++;
         UpdateScore();
-
-        moles[index].gameObject.SetActive(false);
+        moles[index].image.enabled = false;
     }
 
     void UpdateScore()
@@ -130,7 +139,7 @@ public class WhacAMoleGame : MonoBehaviour
         gameRunning = false;
 
         foreach (Button mole in moles)
-            mole.gameObject.SetActive(false);
+            mole.image.enabled = false;
 
         gameOverScreen.SetActive(true);
         gameUI.SetActive(false);
@@ -138,6 +147,7 @@ public class WhacAMoleGame : MonoBehaviour
 
         Debug.Log("Game Over! Final Score: " + score);
     }
+
     public void RestartGame()
     {
         StartGame();
