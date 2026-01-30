@@ -3740,12 +3740,12 @@ MonoBehaviour:
   cardPrefab: {fileID: 6124759249102927502, guid: e22e30837ce82d94da5104cdb4f14a40, type: 3}
   gridTransform: {fileID: 1734985186}
   sprites:
-  - {fileID: 3573036208370857778, guid: 7642ca3dd7ed0bc41bbb809d82cf763f, type: 3}
-  - {fileID: -2227294742669426013, guid: 2dd3a94eafb96d440a09945be2e896c0, type: 3}
-  - {fileID: 6672437348426085017, guid: 79e6cb1b426e21a44a27a8b561e69526, type: 3}
-  - {fileID: 8940803840605149798, guid: baed9b0aa7501b848a14e926df7133a0, type: 3}
-  - {fileID: 2829232388215122354, guid: ba2b7fced08eaa24e8a86d5db52de767, type: 3}
-  - {fileID: 3176150492313142996, guid: 1deb2fd76b215d649be1dfea9fc6b98b, type: 3}
+  - {fileID: 21300000, guid: f2fea3f8b63e3f54cb1083c4ba20e2d6, type: 3}
+  - {fileID: 21300000, guid: 5afe7e4febf702d46ba1090d78191a56, type: 3}
+  - {fileID: 21300000, guid: 895a312bd791e6b4fb4aa37129062347, type: 3}
+  - {fileID: 21300000, guid: 55ee013bbc6f15a419dfc92bbe681568, type: 3}
+  - {fileID: 21300000, guid: 1e727da04fc7ede4b8ed171da0a09acb, type: 3}
+  - {fileID: 21300000, guid: 7274f860956a82545b355bc20310ca44, type: 3}
   victoryScreen: {fileID: 223849957}
 --- !u!1 &1714068841
 GameObject:
