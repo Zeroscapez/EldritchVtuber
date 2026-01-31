@@ -9,6 +9,8 @@ Manager: Morning, Crystal, ready for your debut? #message
 Crystal: I-I uh, I think so! #message
 Manager: You mean, you know so? Just need to make sure you have everything setup already, you gullible meatbag. #message
 
+
+
 <<emotion Character confused>>
 Crystal: W-What? #message
 Manager: Haha, it's a friendly saying. #message
@@ -33,7 +35,7 @@ Manager: So, moving on #message
 <<emotion  Character nervous>>
 
 <<highlight_1 GameManager>>
-Manager: You should see the request board and your approval rating. #message
+Manager: You should see the requests board and your approval rating. #message
 
 Manager: The Request Board is where chat can spend their hard earned money to make you do anything they’d like. #message
 
@@ -52,17 +54,21 @@ Manager: Well, if you don't complete their request your approval will go down, a
 
 <<start_request RequestSystem 3>>
 Manager: Just to make sure you're on task, I'm gonna submit a request. #message
+<<highlight_1 GameManager>>
 
 <<emotion Character neutral>>
-Manager: Good, next, see that cat looking icon on your taskbar, go ahead and click that. #message
+<<highlight_2 GameManager>>
+Manager: Now, see that cat looking icon on your taskbar, go ahead and click that. #message
 
 ===
 
 
 title: TutorialSection2
 ---
+<<highlight_2 GameManager>>
+Manager: I'm just going to borrow your dialogue box for now.
 
-Manager: I'm just going to borrow your voicebox for now.
+Manager: This is the browser, you can use this to get around the web, well...to any sites you're allowed to go to.
 
 <<emotion Character cry>>
 <Cry*stal>: Hey...I was using that...
@@ -70,6 +76,8 @@ Manager: I'm just going to borrow your voicebox for now.
 Manager: Good, go ahead and close out the browser, hit the little X at the top right. 
 
 Manager: Now, open your file explorer, the folder looking icon on your taskbar. 
+
+Manager: We'll use t--
 
 ===
 
@@ -88,23 +96,26 @@ title: PlayerClicksImage
 
 <Cry*Stal>: W-W-What...the hell is that?!
 
+<<highlight_3 GameManager>>
 Manager: That should be everything you need, oh and I even setup a camera for your little friend
 ===
 
 title: TutorialSection4
 ---
 
+Manager: That should be all you need to know, from time to time, chat will send you apps to play as well, so watch out for those.
+
+Manager: Oh and don't download any viruses.
+
+<<emotion  Character nervous>>
+Crystal: Yes sir.
+
+Manager: Well that's it have fun on your first Day.
+
+<<start_day GameManager Day1>>
 
 ===
 
-title: CrystalSpeak
-position: -330,-83
----
-
-<<emotion Character joy>>
-
-Crystal: Hi everyone!!!
-===
 
 title: PushedButton
 position: -115,-180

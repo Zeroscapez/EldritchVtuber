@@ -64,9 +64,9 @@ public class RequestSystem : MonoBehaviour
        
     }
 
-    public void InitializeDay()
+    public void InitializeDay(DayOfWeek today)
     {
-        SetDayList(GameManager.Instance.GetCurrentDay());
+        SetDayList(today);
         
     }
 
