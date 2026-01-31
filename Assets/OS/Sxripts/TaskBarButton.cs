@@ -20,7 +20,8 @@ public abstract class TaskBarButton : MonoBehaviour
 
     public virtual void OpenApp()
     {
+        //AppLoaderManager.Instance.CloseAllApps();
 
-        
+
     }
 }

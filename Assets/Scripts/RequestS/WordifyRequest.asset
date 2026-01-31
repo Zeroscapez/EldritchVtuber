@@ -16,5 +16,5 @@ MonoBehaviour:
   QuestName: Play Wordify
   IsActive: 0
   Description: 
-  ApprovalAmount: 0
+  ApprovalAmount: 10
   IsCompleted: 0

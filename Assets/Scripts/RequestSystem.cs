@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Yarn.Unity;
@@ -47,7 +46,7 @@ public class RequestSystem : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+           
         }
         else
         {
@@ -131,7 +130,7 @@ public class RequestSystem : MonoBehaviour
         if (isRequestActive == true)
         {
             CurrentRequest = AvailableRequests.Find(a => a.RequestID == requestID);
-
+          
             CurrentRequest.isCompleted = true;
             CurrentRequest.isRequestActive = false;
             currentApprovalRating += CurrentRequest.refRequest.ApprovalAmount;
@@ -139,8 +138,9 @@ public class RequestSystem : MonoBehaviour
             StreamOverlayUIControl.OnApprovalChange?.Invoke();
 
             isRequestActive = false;
-       
-     
+            CurrentRequest = null;
+
+
         }
     }
 
@@ -163,6 +163,7 @@ public class RequestSystem : MonoBehaviour
             StreamOverlayUIControl.OnApprovalChange?.Invoke();
 
             isRequestActive = false;
+            CurrentRequest = null;
 
             NextRequest();
         }

@@ -16,6 +16,7 @@ public class WhacAMoleGame : MonoBehaviour
     public TMP_Text finalScoreText;
 
     [Header("Game References")]
+    public GameObject gameRef;
     public RectTransform gameArea;
     public Button molePrefab;
     public RectTransform[] holes;
@@ -39,6 +40,7 @@ public class WhacAMoleGame : MonoBehaviour
 
     public void StartGame()
     {
+        GameManager.Instance.activeDialogueRunner.StartDialogue("StartWacking");
         startScreen.SetActive(false);
         gameUI.SetActive(true);
         gameOverScreen.SetActive(false);
@@ -146,10 +148,20 @@ public class WhacAMoleGame : MonoBehaviour
         finalScoreText.text = "Score: " + score;
 
         Debug.Log("Game Over! Final Score: " + score);
+
+        GameManager.Instance.activeDialogueRunner.StartDialogue("WacmoleWin");
+
+        StartCoroutine(CloseGame());
     }
 
     public void RestartGame()
     {
         StartGame();
+    }
+
+    public IEnumerator CloseGame()
+    {
+        yield return new WaitForSeconds(2);
+        gameRef.SetActive(false);
     }
 }

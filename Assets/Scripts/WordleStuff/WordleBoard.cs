@@ -92,6 +92,8 @@ public class WordleBoard : MonoBehaviour
 
     public void EndWordle()
     {
+        WordleAttempts();
+        RequestSystem.Instance.CompleteRequest(21);
         PlayerControlManager.Instance.EnablePlayerControl(true);
         InputSystem.actions.FindActionMap("Wordle").Disable();
         wordleParent.SetActive(false);
@@ -115,7 +117,7 @@ public class WordleBoard : MonoBehaviour
             return;
         }
         
-        Debug.Log("Typeletter pressed");
+  
 
         if(columnIndex >= rows[rowIndex].tiles.Length)
         {
@@ -240,15 +242,19 @@ public class WordleBoard : MonoBehaviour
     {
         if(attempts <= 2)
         {
-            Debug.Log("AMAZING"); return;
+            Debug.Log("AMAZING");
+            GameManager.Instance.activeDialogueRunner.StartDialogue("WordifyAmazing");
         }
         else if (attempts <= 4)
         {
-            Debug.Log("GOOD"); return ;
+            Debug.Log("GOOD");
+            GameManager.Instance.activeDialogueRunner.StartDialogue("WordifyGood");
 
-        }else if(attempts >= 5)
+        }
+        else if(attempts >= 5)
         {
-            Debug.Log("Trash"); return;
+            Debug.Log("Trash");
+            GameManager.Instance.activeDialogueRunner.StartDialogue("WordifyBad");
         }
     }
 

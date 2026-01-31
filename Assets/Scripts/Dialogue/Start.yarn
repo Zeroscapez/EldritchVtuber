@@ -57,7 +57,9 @@ Manager: Just to make sure you're on task, I'm gonna submit a request. #message
 <<highlight_1 GameManager>>
 
 <<emotion Character neutral>>
+
 <<highlight_2 GameManager>>
+<<caninteract GameManager true>>
 Manager: Now, see that cat looking icon on your taskbar, go ahead and click that. #message
 
 ===
@@ -65,61 +67,46 @@ Manager: Now, see that cat looking icon on your taskbar, go ahead and click that
 
 title: TutorialSection2
 ---
+
 <<highlight_2 GameManager>>
+Manager: That's weird?
+
+<<caninteract GameManager false>>
 Manager: I'm just going to borrow your dialogue box for now.
 
-Manager: This is the browser, you can use this to get around the web, well...to any sites you're allowed to go to.
-
-<<emotion Character cry>>
+<<emotion Character pout>>
 <Cry*stal>: Hey...I was using that...
 
-Manager: Good, go ahead and close out the browser, hit the little X at the top right. 
-<<jump TutorialSection2_1>>
-===
 
+Manager: Its seems like the browser's not working, I'll have tech support take a look on Friday.
 
-title: TutorialSection2_1
+<<emotion Character smirk>>
+<Cry*stal>: Wow, even big companies like yours run into simple problems, huh?
 
----
-<<start_request RequestSystem 12>>
-Manager: Now, open your file explorer, the folder looking icon on your taskbar. 
+Manager: You do remember I'm paying you, correct?
 
+<<emotion Character cry>>
+
+<Cry*Stal>: S-sorry...
+
+Manager: Now, let's move on.
+<<jump TutorialSection3>>
 ===
 
 title: TutorialSection3
 ---
-
-Manager: We'll use t--
-
-<<emotion  Character confused>>
-<Cry*stal>: Hm? What's that file? Do not click.jpg?
-
-Manager: I wouldn't click on that, go ahead and close your file explorer, like you did the browser.
-===
-
-title: PlayerClicksImage
----
-
-<<emotion  Character fear>>
-
-<Cry*Stal>: W-W-What...the hell is that?!
-
-
-===
-
-title: TutorialSection4
----
-
+<<caninteract GameManager true>>
 <<highlight_3 GameManager>>
-Manager: And that should be everything you need, oh and I even setup a camera for your little friend.
+Manager: That should be everything you need, oh and I even setup a camera for your little friend.
 
 <<emotion Character smug>>
-Crystal: You mean, the great Kevin!!
+<Cry*Stal>: You mean, the great Kevin!!
 
 Manager: Yeah uh, whatever its name is.
 
 Kevin: *squeak*
 
+<<highlight_3 GameManager>>
 <<emotion Character neutral>>
 
 Manager: From time to time, chat will send you apps to play as well, so watch out for those.
@@ -127,13 +114,15 @@ Manager: From time to time, chat will send you apps to play as well, so watch ou
 Manager: Oh and don't download any viruses.
 
 <<emotion  Character nervous>>
-Crystal: Yes sir.
+<Cry*Stal>: Yes sir.
 
+<<emotion  Character joy>>
 Manager: Well that's it have fun on your first Day.
 
 <<start_day GameManager Day1>>
 
 ===
+
 
 
 title: PushedButton

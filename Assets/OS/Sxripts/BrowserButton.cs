@@ -2,34 +2,26 @@ using UnityEngine;
 
 public class BrowserButton : TaskBarButton
 {
-   
+
     public override void OpenApp()
     {
-      
-        if (connectedApp != null)
+
+
+
+
+        if (RequestSystem.Instance.CurrentRequest != null)
         {
-            if (connectedApp.activeSelf == false)
+            if (RequestSystem.Instance.CurrentRequest.RequestID == 11)
             {
-                connectedApp.SetActive(true);
 
-                if (RequestSystem.Instance.CurrentRequest != null)
-                {
-                    if (RequestSystem.Instance.CurrentRequest.RequestID == 11)
-                    {
-                       
-                        RequestSystem.Instance.CompleteRequest(11);
-                        GameManager.Instance.activeDialogueRunner.StartDialogue("TutorialSection2");
-                    }
-
-                }
-
-
-
+                RequestSystem.Instance.CompleteRequest(11);
+                GameManager.Instance.activeDialogueRunner.StartDialogue("TutorialSection2");
             }
-            else
-            {
-                connectedApp.SetActive(false);
-            }
+
         }
+
+
+
+
     }
 }

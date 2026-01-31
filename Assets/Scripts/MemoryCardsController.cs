@@ -102,6 +102,7 @@ public class MemoryCardsController : MonoBehaviour
 
     IEnumerator EndGame()
     {
+        GameManager.Instance.activeDialogueRunner.StartDialogue("memoryWin");
         yield return new WaitForSeconds(2);
         memoryGame.SetActive(false);
     }

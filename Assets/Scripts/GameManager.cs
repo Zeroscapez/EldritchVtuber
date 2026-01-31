@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Yarn.Unity;
 
 public class GameManager : MonoBehaviour
@@ -11,7 +12,11 @@ public class GameManager : MonoBehaviour
     private DayOfWeek currentDay;
 
     [Header("Dialogue")]
+    public GameObject bloodbox;
+    public GameObject narratorScreen;
     public DialogueRunner activeDialogueRunner;
+    public DialogueRunner NarratorDialogueRunner;
+    public DialogueRunner chatDialogueRunner;
 
     [Header("Audio")]
     public AudioManager audioManager;
@@ -22,12 +27,19 @@ public class GameManager : MonoBehaviour
     public List<GameObject> highlighters2;
     public List<GameObject> highlighters3;
 
+    [Header("AppIcons")]
+    public CanvasGroup taskbarIcons;
+    public CanvasGroup desktopIcons;
+    public List<GameObject> WhacMoleObjects;
+    public List<GameObject> wordifyObjects;
+    public List<GameObject> memoryGameObjects;
+
     public void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            
         }
         else
         {
@@ -43,6 +55,11 @@ public class GameManager : MonoBehaviour
         ShowOutline3();
         currentDay = DayOfWeek.Tutorial;
         RequestSystem.Instance.InitializeDay(currentDay);
+        taskbarIcons.interactable = false;
+        desktopIcons.interactable = false;
+        audioManager = AudioManager.Instance;
+        audioManager.PlayBGM();
+       
  
        
 
@@ -112,6 +129,62 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [YarnCommand("show_wordify")]
+    public void showWordify()
+    {
+        AppLoaderManager.Instance.wordify.gameObject.SetActive(true);
+        //foreach (GameObject go2 in wordifyObjects)
+        //{
+        //    go2.SetActive(true);
+        //}
+    }
+
+    [YarnCommand("show_wacmole")]
+    public void showWacmole()
+    {
+       AppLoaderManager.Instance.whacmolegame.gameObject.SetActive(true);
+        //foreach (GameObject go2 in WhacMoleObjects)
+        //{
+        //    go2.SetActive(true);
+        //}
+    }
+
+    [YarnCommand("show_memory")]
+    public void showMemory()
+    {
+        AppLoaderManager.Instance.memoryGame.gameObject.SetActive(true);
+        //foreach (GameObject go2 in memoryGameObjects)
+        //{
+        //    go2.SetActive(true);
+        //}
+    }
+
+    [YarnCommand("caninteract")]
+    public void allowOSInteract(bool allowOSInteract)
+    {
+        taskbarIcons.interactable = allowOSInteract;
+        desktopIcons.interactable = allowOSInteract;
+    }
+
+    [YarnCommand("narrationscreen")]
+    public void narrationScreenOn()
+    {
+        narratorScreen.SetActive(true);
+    }
+
+    [YarnCommand("setbloodbox")]
+    public void activateBloodBox()
+    {
+        bloodbox.SetActive(true);
+    }
+
+    [YarnCommand("endgame")]
+    public void EndGame()
+    {
+        SceneManager.LoadScene("TitleScreen");
+    }
+
+
     [YarnCommand("start_day")]
     public void StartDay(string Day)
     {
@@ -136,11 +209,19 @@ public class GameManager : MonoBehaviour
 
         }
 
+       
         RequestSystem.Instance.InitializeDay(currentDay);
         activeDialogueRunner.StartDialogue(Day);
 
     }
 
+    [YarnCommand("chat_response")]
+    public void chat(string nodeName)
+    {
+        chatDialogueRunner.StartDialogue(nodeName);
+    }
+
+   
 
 
 }

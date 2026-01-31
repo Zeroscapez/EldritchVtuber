@@ -9,6 +9,7 @@ public class FrogicordButton : TaskBarButton
         {
             if (connectedApp.activeSelf == false)
             {
+                base.OpenApp();
                 connectedApp.SetActive(true);
 
 

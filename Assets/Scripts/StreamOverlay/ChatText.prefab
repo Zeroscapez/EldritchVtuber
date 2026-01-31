@@ -129,7 +129,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 276.8243, y: 0}
+  m_SizeDelta: {x: 242.34, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8345274486219221207
 CanvasRenderer:
@@ -266,7 +266,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 113.22, y: 0}
+  m_SizeDelta: {x: 155.4093, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7840660459268346950
 CanvasRenderer:
@@ -296,7 +296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Bacon:'
+  m_text: 'Flamebringer19:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 207b47b3d991cd34f9c2d80035c67ab4, type: 2}
   m_sharedMaterial: {fileID: 8410987955526576415, guid: 207b47b3d991cd34f9c2d80035c67ab4, type: 2}
@@ -323,12 +323,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 21.85
+  m_fontSizeBase: 19
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
