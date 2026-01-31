@@ -1796,7 +1796,7 @@ MonoBehaviour:
   - {fileID: 1410682492}
   - {fileID: 2011193481}
   - {fileID: 1127168666}
-  verboseLogging: 1
+  verboseLogging: 0
   autoStart: 1
   startNode: Start
   runSelectedOptionAsLine: 0
