@@ -2,8 +2,10 @@ using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Yarn.Unity;
 
 public enum DayOfWeek
 {
@@ -62,12 +64,13 @@ public class RequestSystem : MonoBehaviour
        
     }
 
-    public void InitializeDay()
+    public void InitializeDay(DayOfWeek today)
     {
-        SetDayList(GameManager.Instance.GetCurrentDay());
-        SetRequest();
+        SetDayList(today);
+        
     }
 
+    
     public void StartRequest(int i) //Debug purposes, can select which request to start
     {
         CurrentRequest = AvailableRequests[i];
@@ -76,12 +79,13 @@ public class RequestSystem : MonoBehaviour
         CurrentRequest.refRequest.IsActive = true;
     }
 
+    [YarnCommand("next_request")]
     public void NextRequest()
     {
         AvailableRequests.Remove(CurrentRequest);
         if (AvailableRequests.Count > 0)
         {
-            SetRequest();
+            CurrentRequest = AvailableRequests[0];
            
         }
         else
@@ -92,34 +96,36 @@ public class RequestSystem : MonoBehaviour
         
     }
 
-    public void SetRequest()
+    [YarnCommand("start_request")]
+    public void SetRequest(int requestID)
     {
         
-        CurrentRequest = AvailableRequests[0];
+        CurrentRequest = AvailableRequests.Find(a  => a.RequestID == requestID);
         requestNameText.text = CurrentRequest.refRequest.QuestName;
-        CurrentRequest.refRequest.IsCompleted = false;
-        CurrentRequest.refRequest.IsActive = true;
+        CurrentRequest.isCompleted = false;
+        CurrentRequest.isRequestActive = true;
         isRequestActive = true;
     }
 
-    public IEnumerator CompleteRequest()
+    public void CompleteRequest()
     {
         if (CurrentRequest == null)
         {
-            yield break;
+            return;
         }
 
         if (isRequestActive == true)
-        { 
-        CurrentRequest.refRequest.IsCompleted = true;
-            CurrentRequest.refRequest.IsActive = false;
+        {
+            Debug.Log("Request Completed");
+            CurrentRequest.isCompleted = true;
+            CurrentRequest.isRequestActive = false;
             currentApprovalRating += CurrentRequest.refRequest.ApprovalAmount;
 
             StreamOverlayUIControl.OnApprovalChange?.Invoke();
-        AvailableRequests.Remove(CurrentRequest);
-        isRequestActive = false;
-        yield return new WaitForSeconds(2f);
-        NextRequest();
+            AvailableRequests.Remove(CurrentRequest);
+            isRequestActive = false;
+       
+            NextRequest();
         }
     }
 
