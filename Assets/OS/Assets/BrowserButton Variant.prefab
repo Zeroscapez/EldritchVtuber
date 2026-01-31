@@ -96,8 +96,30 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1467917089956586643, guid: dc09c30a11725c347b41c2187fa46b11, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8229055378600535945, guid: 3c0dc752396dc2e4b81dc4e0be706a84, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2434895120010140667, guid: 3c0dc752396dc2e4b81dc4e0be706a84, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6380360705359573324}
   m_SourcePrefab: {fileID: 100100000, guid: 3c0dc752396dc2e4b81dc4e0be706a84, type: 3}
+--- !u!1 &2033943146556392286 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2434895120010140667, guid: 3c0dc752396dc2e4b81dc4e0be706a84, type: 3}
+  m_PrefabInstance: {fileID: 4463199953574746277}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6380360705359573324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033943146556392286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bee12718ff7a30d4ca4cd62a49a34784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BrowserButton
+  connectedApp: {fileID: 0}

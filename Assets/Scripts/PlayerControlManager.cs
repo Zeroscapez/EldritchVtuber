@@ -44,8 +44,13 @@ public class PlayerControlManager : MonoBehaviour
 
         if(inputSystemUIInputModule != null)
         {
-            inputSystemUIInputModule.enabled = active;
+           
         }
         
+    }
+
+    public void EnablePlayerClick(bool active)
+    {
+        inputSystemUIInputModule.enabled = active;
     }
 }

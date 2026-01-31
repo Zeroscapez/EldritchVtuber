@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ad5d99188ad0846a9487aa24ca57e9, type: 3}
   m_Name: ClickBroswerRequest
   m_EditorClassIdentifier: Assembly-CSharp::RequestData
-  QuestID: 3
+  QuestID: 11
   QuestName: Open Browser
   IsActive: 0
   Description: 
-  ApprovalAmount: 30
+  ApprovalAmount: 15
   IsCompleted: 0

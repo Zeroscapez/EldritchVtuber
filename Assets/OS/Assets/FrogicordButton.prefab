@@ -90,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2434895120010140667, guid: 3c0dc752396dc2e4b81dc4e0be706a84, type: 3}
       propertyPath: m_Name
-      value: TaskBarButton (1) Variant
+      value: FrogicordButton
       objectReference: {fileID: 0}
     - target: {fileID: 6499161078605548671, guid: 3c0dc752396dc2e4b81dc4e0be706a84, type: 3}
       propertyPath: m_Sprite
@@ -99,5 +99,26 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2434895120010140667, guid: 3c0dc752396dc2e4b81dc4e0be706a84, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 846942521434566479}
   m_SourcePrefab: {fileID: 100100000, guid: 3c0dc752396dc2e4b81dc4e0be706a84, type: 3}
+--- !u!1 &8348400129909719098 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2434895120010140667, guid: 3c0dc752396dc2e4b81dc4e0be706a84, type: 3}
+  m_PrefabInstance: {fileID: 5913513943616281537}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &846942521434566479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8348400129909719098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 135c4b7170fbd9e48937c3208542676d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FrogicordButton
+  connectedApp: {fileID: 0}

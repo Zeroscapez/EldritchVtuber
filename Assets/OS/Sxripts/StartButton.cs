@@ -1,20 +1,30 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StartButton : MonoBehaviour
+public class StartButton : TaskBarButton
 {
-    private Button buttonref;
 
-    void Start()
+
+    public override void OpenApp()
     {
-        buttonref = GetComponent<Button>();
-        buttonref.onClick.AddListener(OnStartButtonClicked);
-    }
+      
+        if (connectedApp != null)
+        {
+            if (connectedApp.activeSelf == false)
+            {
+                connectedApp.SetActive(true);
+
+             
 
 
-    private void OnStartButtonClicked()
-    {
-        //UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
-        Debug.Log("Start Button Clicked - Load MainScene");
+
+            }
+            else
+            {
+                connectedApp.SetActive(false);
+            }
+
+
+        }
     }
 }

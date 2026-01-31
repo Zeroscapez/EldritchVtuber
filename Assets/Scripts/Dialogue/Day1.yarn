@@ -2,5 +2,164 @@ title: Day1
 ---
 
 <<emotion Character joy>>
-Crystal: Good Morning my wonderful viewers.
+<Cry*Stal>: Good morning my wonderful viewers!
+<<emotion Character joy>>
+
+<Cry*Stal>: How's everyone's Day?
+<<chat_response GameManager IntroResponse>>
+
+<Cry*Stal>: Let me just open the requests thing, uhh, there we go.
+<<wait 1>>
+
+
+<<start_request RequestSystem 21>>
+<Cry*Stal>: Oh wow, a request already?
+<Cry*Stal>: Let's see, oh you want me to play Wordify?
+<Cry*Stal>: I've heard a lot about that game in recent days.
+
+<<chat_response GameManager ChatDay1>>
+
+<Cry*Stal>: Sure, I'll give it a go.
+
+<Cry*Stal>: So all I have to do is just figure out what the word is?
+
+<Cry*Stal>: How hard can this be?
+<<emotion Character neutral>>
+<<show_wordify GameManager>>
+===
+
+title: WordifyAmazing
+---
+
+<Cry*Stal>: That was easy.
+<<emotion Character smug>>
+
+<Cry*Stal>: See how smart I am chat!!
+
+<<wait 1>>
+<<jump Whacmole>>
+===
+
+
+title: WordifyGood
+---
+
+<Cry*Stal>: Oh wow, that really gets your brain going.
+<<emotion Character joy>>
+
+<Cry*Stal>: That was pretty fun!
+
+<<wait 1>>
+<<jump Whacmole>>
+===
+
+
+title: WordifyBad
+---
+<Cry*Stal>: ....
+<<emotion Character cry>>
+
+<Cry*Stal>: I don't want to do that ever again...
+
+<<wait 1>>
+<<emotion Character neutral>>
+<<jump Whacmole>>
+
+===
+
+title: Whacmole
+---
+<<start_request RequestSystem 22>>
+<Cry*Stal>: Oh, the next request has come in.
+
+<<emotion Character joy>>
+<<show_wacmole GameManager>>
+<Cry*Stal>: Ohhh, I always loved wacky moles.
+
+===
+
+title: StartWacking
+---
+
+<<emotion  Character smug>>
+<Cry*Stal>: LETS WACK SOME MOLES!!
+
+===
+
+title: WacmoleWin
+---
+<Cry*Stal>: I always loved that game as a kid.
+
+<<emotion Character confused>>
+<Cry*Stal>: Though I thought they took it down?
+<Cry*Stal>: Something about being too violent?
+<<emotion Character joy>>
+<<jump memoryGame>>
+
+===
+
+title: memoryGame
+---
+<Cry*Stal: I only have time for one more request for today guys!
+<<start_request RequestSystem 23>>
+
+<Cry*Stal>: Oh? A memory game, let's see what its like.
+<Cry*Stal>: I once was said to have the memory of a goldfish.
+
+<<emotion Character smug>>
+
+<Cry*Stal>: You all must be so jealous.
+
+<<emotion Character joy>>
+<Cry*Stal>: Oh wow, this game looks so cute.
+<Cry*Stal>: Oh right, let me put it on stream.
+
+<<show_memory GameManager>>
+
+
+===
+
+title: memoryWin
+---
+
+<Cry*Stal>: That was adorably fun!
+<Cry*Stal>: Alright, thank you so much everyone, that's all for today.
+<Cry*Stal>: Thank you everyone, see you tomorrow...hmmm..
+
+<<emotion Character confused>>
+<Cry*Stal>: My manager said that I actually got a huge request...well I guess I can stay for a little longer?
+
+<<emotion Character joy>>
+<Cry*Stal>: Let's see what it is..
+
+<<emotion Character fear>>
+<Cry*Stal>: W-what!!?
+
+<<start_request RequestSystem 31>>
+<<wait  2>>
+
+<Cry*Stal>: N-no..I..I..won't do it!!
+
+<<chat_response GameManager ChatDay3>>
+
+<Cry*Stal>: W-w-what's wrong with you people?!
+
+Manager: Do it!!
+
+<Cry*Stal>: GET OUT OF MY HEAD!!
+
+Manager: Do it!! You need this!!
+
+<Cry*Stal>: AHHHHHHHH!!
+
+<<narrationscreen GameManager>>
+<<crunch AudioManager>>
+*CRUNCH*
+
+<<setbloodbox GameManager>>
+Crystal: What, have I done?
+
+<<wait 5>>
+
+<<endgame GameManager>>
 ===

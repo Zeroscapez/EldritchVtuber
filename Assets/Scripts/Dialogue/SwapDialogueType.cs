@@ -348,7 +348,7 @@ public class SwapDialogueType : DialoguePresenterBase
 
             if (line.CharacterName == "Crystal")
             {
-                Debug.Log("Crystal Message");
+               
             }
 
             var prefab = messageObjectPrefab;
