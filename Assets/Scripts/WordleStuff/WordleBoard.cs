@@ -1,4 +1,6 @@
+using System.IO;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -9,7 +11,8 @@ using UnityEngine.UIElements;
 
 public class WordleBoard : MonoBehaviour
 {
-   
+
+    public GameObject wordleParent;
 
     private WordleRow[] rows;
 
@@ -47,7 +50,13 @@ public class WordleBoard : MonoBehaviour
 
     private void OnEnable()
     {
-        
+
+        TextAsset textfile = Resources.Load("official_wordle_all") as TextAsset;
+        validWords = textfile.text.Split('\n').Select(w => w.Trim().ToLower()).ToArray();
+
+        textfile = Resources.Load("official_wordle_common") as TextAsset;
+        solutions = textfile.text.Split('\n').Select(w => w.Trim().ToLower()).ToArray();
+        StartWordle();
 
     }
 
@@ -59,13 +68,9 @@ public class WordleBoard : MonoBehaviour
 
     public void Start()
     {
-       TextAsset textfile = Resources.Load("official_wordle_all") as TextAsset;
-       validWords = textfile.text.Split('\n').Select(w => w.Trim().ToLower()).ToArray();
 
-        textfile = Resources.Load("official_wordle_common") as TextAsset;
-        solutions = textfile.text.Split('\n').Select(w => w.Trim().ToLower()).ToArray();
+        
 
-        StartWordle();
     }
 
     void Update()
@@ -89,7 +94,7 @@ public class WordleBoard : MonoBehaviour
     {
         PlayerControlManager.Instance.EnablePlayerControl(true);
         InputSystem.actions.FindActionMap("Wordle").Disable();
-        this.gameObject.SetActive(false);
+        wordleParent.SetActive(false);
     }
 
     
@@ -172,6 +177,7 @@ public class WordleBoard : MonoBehaviour
         }
         string remaining = targetWord;
 
+        
 
         for(int i = 0; i < row.tiles.Length; i++)
         {
@@ -219,16 +225,32 @@ public class WordleBoard : MonoBehaviour
         }
         rowIndex++;
         columnIndex = 0;
-
+        attempts++;
         if (rowIndex >= rows.Length)
         {
             Debug.Log("No more attempts left!");
             rowIndex = rows.Length - 1;
             // End game logic here
+            EndWordle();
             return;
         }
     }
   
+    public void WordleAttempts()
+    {
+        if(attempts <= 2)
+        {
+            Debug.Log("AMAZING"); return;
+        }
+        else if (attempts <= 4)
+        {
+            Debug.Log("GOOD"); return ;
+
+        }else if(attempts >= 5)
+        {
+            Debug.Log("Trash"); return;
+        }
+    }
 
     private bool IsValidWord(string word)
     {

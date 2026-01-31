@@ -1,10 +1,7 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-public class StartButton : TaskBarButton
+public class MolewhacButton : TaskBarButton
 {
-
-
     public override void OpenApp()
     {
       
@@ -13,9 +10,6 @@ public class StartButton : TaskBarButton
             if (connectedApp.activeSelf == false)
             {
                 connectedApp.SetActive(true);
-
-             
-
 
 
             }

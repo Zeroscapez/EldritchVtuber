@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Yarn.Unity;
@@ -29,8 +30,16 @@ public class RequestSystem : MonoBehaviour
     public List<RequestLogic> AvailableRequestsWednesday = new List<RequestLogic>();
     public List<RequestLogic> AvailbleRequestTutorial = new List<RequestLogic>();
 
+    [Header("Request Parents")]
+    public GameObject TutorialRequestParent;
+    public GameObject Day1RequestParent;
+    public GameObject Day2RequestParent;
+    public GameObject Day3RequestParent;
+
+
     public bool isRequestActive = false;
     public int currentApprovalRating = 0;
+    public int requestIndex = 0;
 
 
     public void Awake()
@@ -82,10 +91,12 @@ public class RequestSystem : MonoBehaviour
     [YarnCommand("next_request")]
     public void NextRequest()
     {
-        AvailableRequests.Remove(CurrentRequest);
+       
+
         if (AvailableRequests.Count > 0)
         {
-            CurrentRequest = AvailableRequests[0];
+            requestIndex++;
+            CurrentRequest = AvailableRequests[requestIndex];
            
         }
         else
@@ -106,26 +117,71 @@ public class RequestSystem : MonoBehaviour
         CurrentRequest.isRequestActive = true;
         isRequestActive = true;
     }
+   
 
-    public void CompleteRequest()
+    [YarnCommand("complete_request")]
+    public void CompleteRequest(int requestID)
     {
         if (CurrentRequest == null)
         {
+            Debug.LogWarning("REQUEST MISSING");
             return;
         }
 
         if (isRequestActive == true)
         {
-            Debug.Log("Request Completed");
+            CurrentRequest = AvailableRequests.Find(a => a.RequestID == requestID);
+
             CurrentRequest.isCompleted = true;
             CurrentRequest.isRequestActive = false;
             currentApprovalRating += CurrentRequest.refRequest.ApprovalAmount;
 
             StreamOverlayUIControl.OnApprovalChange?.Invoke();
-            AvailableRequests.Remove(CurrentRequest);
+
             isRequestActive = false;
        
+     
+        }
+    }
+
+    public void CompleteRequest()
+    {
+        if (CurrentRequest == null)
+        {
+            Debug.LogWarning("REQUEST MISSING");
+            return;
+        }
+
+        if (isRequestActive == true)
+        {
+            
+     
+            CurrentRequest.isCompleted = true;
+            CurrentRequest.isRequestActive = false;
+            currentApprovalRating += CurrentRequest.refRequest.ApprovalAmount;
+
+            StreamOverlayUIControl.OnApprovalChange?.Invoke();
+
+            isRequestActive = false;
+
             NextRequest();
+        }
+    }
+
+    [YarnCommand("check_request")]
+    public void CheckForRequest()
+    {
+        if (CurrentRequest == null)
+        {
+            if(AvailableRequests.Count > 0)
+            {
+                CurrentRequest = AvailableRequests[0];
+            }
+            else
+            {
+                CurrentRequest = null;
+                requestNameText.text = "No More Requests Today";
+            }
         }
     }
 
@@ -138,7 +194,8 @@ public class RequestSystem : MonoBehaviour
         RequestLogic specificRequest = AvailableRequests[index];
         if (specificRequest.refRequest == false)
         {
-            Debug.Log("Completing Specific Request: " + specificRequest.refRequest);
+            
+    
             specificRequest.refRequest.IsCompleted = true;
             specificRequest.refRequest.IsActive = false;
             currentApprovalRating += specificRequest.refRequest.ApprovalAmount;
@@ -152,13 +209,28 @@ public class RequestSystem : MonoBehaviour
 
     public void SetDayList(DayOfWeek today)
     {
+        AvailableRequests.Clear();
         switch (today)
         {
             case DayOfWeek.Tutorial:
-                AvailableRequests = AvailbleRequestTutorial;
+                foreach(Transform c in TutorialRequestParent.transform)
+                {
+                    RequestLogic request;
+
+                    request = c.GetComponent<RequestLogic>();
+
+                    AvailableRequests.Add(request);
+                }
                 break;
             case DayOfWeek.Monday:
-                AvailableRequests = AvailableRequestsMonday;
+                foreach (Transform c in Day1RequestParent.transform)
+                {
+                    RequestLogic request;
+
+                    request = c.GetComponent<RequestLogic>();
+
+                    AvailableRequests.Add(request);
+                }
                 break;
 
             case DayOfWeek.Tuesday:
@@ -169,6 +241,8 @@ public class RequestSystem : MonoBehaviour
                 AvailableRequests = AvailableRequestsWednesday;
                 break;
         }
+
+        requestNameText.text = "No More Requests Today";
     }
 
 }

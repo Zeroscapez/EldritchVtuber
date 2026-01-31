@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     {
         ShowOutline1();
         ShowOutline2();
+        ShowOutline3();
         currentDay = DayOfWeek.Tutorial;
         RequestSystem.Instance.InitializeDay(currentDay);
  
@@ -80,6 +81,24 @@ public class GameManager : MonoBehaviour
     public void ShowOutline2()
     {
         foreach (GameObject go2 in highlighters2)
+        {
+            if (go2.activeSelf == true)
+            {
+                go2.SetActive(false);
+            }
+            else
+            {
+                go2.SetActive(true);
+            }
+
+        }
+    }
+
+
+    [YarnCommand("highlight_3")]
+    public void ShowOutline3()
+    {
+        foreach (GameObject go2 in highlighters3)
         {
             if (go2.activeSelf == true)
             {

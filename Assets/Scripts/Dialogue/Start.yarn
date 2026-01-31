@@ -52,7 +52,7 @@ Manager: Well, if you don't complete their request your approval will go down, a
 <<emotion Character fear>>
 <Cry*stal>: ....Chat, I'll uh, try not to let you guys down...
 
-<<start_request RequestSystem 3>>
+<<start_request RequestSystem 11>>
 Manager: Just to make sure you're on task, I'm gonna submit a request. #message
 <<highlight_1 GameManager>>
 
@@ -74,15 +74,23 @@ Manager: This is the browser, you can use this to get around the web, well...to 
 <Cry*stal>: Hey...I was using that...
 
 Manager: Good, go ahead and close out the browser, hit the little X at the top right. 
+<<jump TutorialSection2_1>>
+===
 
+
+title: TutorialSection2_1
+
+---
+<<start_request RequestSystem 12>>
 Manager: Now, open your file explorer, the folder looking icon on your taskbar. 
-
-Manager: We'll use t--
 
 ===
 
 title: TutorialSection3
 ---
+
+Manager: We'll use t--
+
 <<emotion  Character confused>>
 <Cry*stal>: Hm? What's that file? Do not click.jpg?
 
@@ -96,14 +104,25 @@ title: PlayerClicksImage
 
 <Cry*Stal>: W-W-What...the hell is that?!
 
-<<highlight_3 GameManager>>
-Manager: That should be everything you need, oh and I even setup a camera for your little friend
+
 ===
 
 title: TutorialSection4
 ---
 
-Manager: That should be all you need to know, from time to time, chat will send you apps to play as well, so watch out for those.
+<<highlight_3 GameManager>>
+Manager: And that should be everything you need, oh and I even setup a camera for your little friend.
+
+<<emotion Character smug>>
+Crystal: You mean, the great Kevin!!
+
+Manager: Yeah uh, whatever its name is.
+
+Kevin: *squeak*
+
+<<emotion Character neutral>>
+
+Manager: From time to time, chat will send you apps to play as well, so watch out for those.
 
 Manager: Oh and don't download any viruses.
 

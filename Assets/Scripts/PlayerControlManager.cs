@@ -48,4 +48,9 @@ public class PlayerControlManager : MonoBehaviour
         }
         
     }
+
+    public void EnablePlayerClick(bool active)
+    {
+        inputSystemUIInputModule.enabled = active;
+    }
 }
