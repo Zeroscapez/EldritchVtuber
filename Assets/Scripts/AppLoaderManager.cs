@@ -2,7 +2,15 @@ using UnityEngine;
 
 public class AppLoaderManager : MonoBehaviour
 {
+    public static AppLoaderManager Instance;
+
+    
     public GameObject messagingAppPrefab;
+
+    void Awake()
+    {
+        Instance = this;
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

@@ -3,18 +3,96 @@ position: 1,34
 ---
 
 <<emotion Character neutral>>
-Manager: Morning, Crystal, ready for your debut?
+Manager: Morning, Crystal, ready for your debut? #message
+
 <<emotion Character nervous>>
-Crystal: I-I uh, I think so!
-Manager: You mean, you know so? Just need to make sure you have everything setup already, you gullible meatbag.
+Crystal: I-I uh, I think so! #message
+Manager: You mean, you know so? Just need to make sure you have everything setup already, you gullible meatbag. #message
+
 <<emotion Character confused>>
-Crystal: W-What?
-Manager: Haha, it's a friendly saying.
+Crystal: W-What? #message
+Manager: Haha, it's a friendly saying. #message
+
 <<emotion Character joy>>
-Crystal: Oh! Okay. : )
-Manager: Lets go ahead and start by making sure your microphone is working, go ahead and let the testing audience hear your…grating voice.
+Crystal: Oh! Okay. : ) #message
+Manager: Lets go ahead and start by making sure your microphone is working, go ahead and let the testing audience hear your…grating voice. #message
+
+<<emotion Character joy>>
+<Cry*stal>: Hi everyone!!! 
+Manager: Great, next let’s make sure chat is working, they should already be talking all about you. Let’s make sure it’s nothing bad. #message
+
+<<emotion  Character confused>>
+<Cry*stal>: Bad? 
+Manager: Like, how you have breakfast still stuck in your teeth. #message
+
+<<emotion  Character fear>>
+<Cry*stal>: I do?!
+
+Manager: So, moving on #message
+
+<<emotion  Character nervous>>
+
+<<highlight_1 GameManager>>
+Manager: You should see the request board and your approval rating. #message
+
+Manager: The Request Board is where chat can spend their hard earned money to make you do anything they’d like. #message
+
+<<emotion Character confused>>
+<Cry*stal>: Anything?
+
+Manager: Yep Anything, if you successfully complete their request, your approval will go up and you’ll be paid more at the end of the day. #message
+
+<<emotion Character joy>>
+<Cry*stal>: Ohhh!, then chat,  I’ll make sure to complete your requests!!
+
+Manager: Well, if you don't complete their request your approval will go down, and they'll hate you, and well, I'd have to fire you. #message
+
+<<emotion Character fear>>
+<Cry*stal>: ....Chat, I'll uh, try not to let you guys down...
+
+<<start_request RequestSystem 3>>
+Manager: Just to make sure you're on task, I'm gonna submit a request. #message
+
+<<emotion Character neutral>>
+Manager: Good, next, see that cat looking icon on your taskbar, go ahead and click that. #message
+
+===
 
 
+title: TutorialSection2
+---
+
+Manager: I'm just going to borrow your voicebox for now.
+
+<<emotion Character cry>>
+<Cry*stal>: Hey...I was using that...
+
+Manager: Good, go ahead and close out the browser, hit the little X at the top right. 
+
+Manager: Now, open your file explorer, the folder looking icon on your taskbar. 
+
+===
+
+title: TutorialSection3
+---
+<<emotion  Character confused>>
+<Cry*stal>: Hm? What's that file? Do not click.jpg?
+
+Manager: I wouldn't click on that, go ahead and close your file explorer, like you did the browser.
+===
+
+title: PlayerClicksImage
+---
+
+<<emotion  Character fear>>
+
+<Cry*Stal>: W-W-What...the hell is that?!
+
+Manager: That should be everything you need, oh and I even setup a camera for your little friend
+===
+
+title: TutorialSection4
+---
 
 
 ===

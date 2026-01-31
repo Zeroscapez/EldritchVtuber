@@ -21,7 +21,7 @@ public class WordleBoard : MonoBehaviour
     [SerializeField] private int columnIndex;
     
     private string targetWord = "APPLE";
-    [SerializeField] private string currentGuess = "";
+    [SerializeField] private int attempts = 0;
 
 
 

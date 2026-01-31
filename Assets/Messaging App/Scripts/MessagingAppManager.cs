@@ -13,6 +13,7 @@ public class MessagingAppManager : MonoBehaviour
     public Transform MessageTransform;
     public List<GameObject> MessageList;
     private DialogueRunner messageAppRunner;
+    public GameObject notification;
 
     public void Awake()
     {
@@ -26,15 +27,15 @@ public class MessagingAppManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        messageAppRunner = GameManager.Instance.messageAppDialogueRunner;
+        //messageAppRunner = GameManager.Instance.messageAppDialogueRunner;
 
         // Subscribe to dialogue completion
-        messageAppRunner.onDialogueComplete.AddListener(OnMessageDialogueComplete);
+        //messageAppRunner.onDialogueComplete.AddListener(OnMessageDialogueComplete);
     }
 
     public void OnEnable()
     {
-        StartCoroutine(LoadMessages());
+        notification.SetActive(false);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -53,15 +54,21 @@ public class MessagingAppManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
 
-        GameManager.Instance.messageDialouge("Start");
+       
+    }
+
+    [YarnCommand("notification")]
+    public void SendNotification()
+    {
+        notification.SetActive(true);
     }
 
     private void OnMessageDialogueComplete()
     {
-        // Unsubscribe to avoid repeated calls
-        messageAppRunner.onDialogueComplete.RemoveListener(OnMessageDialogueComplete);
+        //// Unsubscribe to avoid repeated calls
+        //messageAppRunner.onDialogueComplete.RemoveListener(OnMessageDialogueComplete);
 
-        GameManager.Instance.CrystalDialogue("CrystalSpeak");
+        //GameManager.Instance.CrystalDialogue("CrystalSpeak");
     }
 
 }

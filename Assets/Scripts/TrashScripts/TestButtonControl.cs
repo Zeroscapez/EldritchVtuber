@@ -26,7 +26,7 @@ public class TestButtonControl : MonoBehaviour
     {
         Debug.Log("Button was clicked!");
 
-        GameManager.Instance.dialogueBoxDialogueRunner.StartDialogue("PushedButton");
+        GameManager.Instance.activeDialogueRunner.StartDialogue("PushedButton");
     }
 
     public void StartTutorialScene1()
@@ -35,9 +35,7 @@ public class TestButtonControl : MonoBehaviour
 
         if (RequestSystem.Instance.CurrentRequest != null && RequestSystem.Instance.CurrentRequest.RequestID == 0 )
         {
-            Debug
-                .Log("Completing Tutorial Request");
-            RequestSystem.Instance.StartCoroutine(RequestSystem.Instance.CompleteRequest());
+           
         }
 
       

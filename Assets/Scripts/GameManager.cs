@@ -1,3 +1,6 @@
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Yarn.Unity;
 
@@ -6,12 +9,13 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     private DayOfWeek currentDay;
 
-    public DialogueRunner dialogueBoxDialogueRunner;
-    public DialogueRunner messageAppDialogueRunner;
-    public DialogueRunner chatDialogueRunner;
+    [Header("Dialogue")]
+    public DialogueRunner activeDialogueRunner;
 
-    private DialogueRunner activeDialogueRunner;
-
+    [Header("Audio")]
+    public AudioManager audioManager;
+  
+    public List<GameObject> highlighters1;
     
     public void Awake()
     {
@@ -25,13 +29,15 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        ShowOutline1();
         currentDay = DayOfWeek.Tutorial;
         RequestSystem.Instance.InitializeDay();
+ 
+       
 
     }
 
@@ -45,25 +51,24 @@ public class GameManager : MonoBehaviour
     {
         return currentDay;
     }
+
+    [YarnCommand("highlight_1")]
+    public void ShowOutline1()
+    {
+        foreach (GameObject go2 in highlighters1)
+        {
+            if(go2.activeSelf == true)
+            {
+                go2.SetActive(false);
+            }
+            else
+            {
+                go2.SetActive(true);
+            }
+            
+        }
+    }
   
-    public void messageDialouge(string nodename)
-    {
-        if(activeDialogueRunner != null)
-        {
-            activeDialogueRunner.Stop();
-        }
-        activeDialogueRunner = messageAppDialogueRunner;
-        activeDialogueRunner.StartDialogue(nodename);
-    }
-    public void CrystalDialogue(string nodeName)
-    {
-        if (activeDialogueRunner != null)
-        {
-            activeDialogueRunner.Stop();
-        }
-        dialogueBoxDialogueRunner.gameObject.SetActive(true);
-        dialogueBoxDialogueRunner.StartDialogue(nodeName);
-    }
    
     
 }
