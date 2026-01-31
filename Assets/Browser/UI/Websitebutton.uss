@@ -1,6 +1,0 @@
-:root {
-}
-
-.button-big:hover {
-    scale: 1.2 1.2;
-}

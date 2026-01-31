@@ -15,7 +15,8 @@ public class WordleRow : MonoBehaviour
                 word += tiles[i].letter;
             }
 
-            return word;
+          
+            return word.ToLower();
         }
     }
 

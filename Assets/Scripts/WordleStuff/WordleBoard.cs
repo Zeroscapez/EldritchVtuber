@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -20,8 +21,8 @@ public class WordleBoard : MonoBehaviour
     [SerializeField] private int columnIndex;
     
     private string targetWord = "APPLE";
-    [SerializeField] private string currentGuess = "";
-    private int attempts = 0;
+    [SerializeField] private int attempts = 0;
+
 
 
     [Header("States")]
@@ -52,17 +53,17 @@ public class WordleBoard : MonoBehaviour
 
     private void OnDisable()
     {
-        EndWordle();
+        
 
     }
 
     public void Start()
     {
        TextAsset textfile = Resources.Load("official_wordle_all") as TextAsset;
-       validWords = textfile.text.Split('\n');
+       validWords = textfile.text.Split('\n').Select(w => w.Trim().ToLower()).ToArray();
 
         textfile = Resources.Load("official_wordle_common") as TextAsset;
-        solutions = textfile.text.Split('\n');
+        solutions = textfile.text.Split('\n').Select(w => w.Trim().ToLower()).ToArray();
 
         StartWordle();
     }
@@ -88,10 +89,14 @@ public class WordleBoard : MonoBehaviour
     {
         PlayerControlManager.Instance.EnablePlayerControl(true);
         InputSystem.actions.FindActionMap("Wordle").Disable();
+        this.gameObject.SetActive(false);
     }
+
+    
 
     private void SetRandomWord()
     {
+        targetWord = "";
         targetWord = solutions[Random.Range(0, solutions.Length)];
         targetWord = targetWord.ToLower().Trim();
     }
@@ -155,7 +160,6 @@ public class WordleBoard : MonoBehaviour
     public void OnRowSubmit(WordleRow row)
     {
 
-        
         if(!submitRow.WasPressedThisFrame())
         {
             return;
@@ -206,12 +210,20 @@ public class WordleBoard : MonoBehaviour
             }
         }
 
+        if(HasWon(row))
+        {
+
+            Debug.Log("You win!");
+            EndWordle();
+            return;
+        }
         rowIndex++;
         columnIndex = 0;
 
         if (rowIndex >= rows.Length)
         {
             Debug.Log("No more attempts left!");
+            rowIndex = rows.Length - 1;
             // End game logic here
             return;
         }
@@ -222,11 +234,26 @@ public class WordleBoard : MonoBehaviour
     {
         for (int i = 0; i < validWords.Length; i++)
         {
-            if(validWords[i] == word)
+           
+            if (validWords[i] == word.Trim().ToLower())
             {
+             
                 return true;
             }
+            
         }
         return false;
+    }
+
+    private bool HasWon(WordleRow row)
+    {
+        for(int i = 0; i < row.tiles.Length; i++)
+        {
+            if(row.tiles[i].state != correctState)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

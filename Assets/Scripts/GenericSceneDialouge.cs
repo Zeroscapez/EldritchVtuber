@@ -16,6 +16,6 @@ public class GenericSceneDialouge : MonoBehaviour
 
     void GameStartDialouge()
     {
-        DialougeSystem.Instance.StartCoroutine(DialougeSystem.Instance.LoadDialouge("Game Start"));
+      
     }
 }

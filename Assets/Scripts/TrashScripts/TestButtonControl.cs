@@ -26,10 +26,7 @@ public class TestButtonControl : MonoBehaviour
     {
         Debug.Log("Button was clicked!");
 
-        if (GameManager.Instance.GetCurrentDay() == DayOfWeek.Tutorial)
-        {
-            StartTutorialScene1();
-        }
+        GameManager.Instance.activeDialogueRunner.StartDialogue("PushedButton");
     }
 
     public void StartTutorialScene1()
@@ -38,12 +35,10 @@ public class TestButtonControl : MonoBehaviour
 
         if (RequestSystem.Instance.CurrentRequest != null && RequestSystem.Instance.CurrentRequest.RequestID == 0 )
         {
-            Debug
-                .Log("Completing Tutorial Request");
-            RequestSystem.Instance.StartCoroutine(RequestSystem.Instance.CompleteRequest());
+           
         }
 
-        DialougeSystem.Instance.LoadDialouge("Tutorial Scene 1");
+      
         
 
     }
